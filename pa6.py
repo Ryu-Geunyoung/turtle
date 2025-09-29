@@ -1,19 +1,13 @@
 import turtle
 import random
 
-# =========================
 # 전역 상태 및 설정 변수
-# =========================
-
 game_over = False           # 게임 종료 여부
 betting_mode = True         # 배팅 가능 상태 여부
 player_bet = None           # 플레이어가 선택한 거북이 이름
 horse_names = []            # 사용자 정의 거북이 이름 저장
 
-# =========================
 # 화면 설정 및 결승선, 패널티 라인
-# =========================
-
 screen = turtle.Screen()
 screen.title("트럼프 거북이 경주")   # 윈도우 제목
 screen.bgcolor("lightgreen")        # 배경색
@@ -53,10 +47,8 @@ for pd in penalty_line_distances:
 # 패널티 발동 거리 (15m 간격)
 penalty_trigger_distances = [i for i in range(15, 76, 15)]
 
-# =========================
-# 말(거북이) 설정
-# =========================
 
+# 말(거북이) 설정
 symbols = ['♥', '♠', '♣', '♦']    # 각 말의 심볼 (카드 심볼과 연결됨)
 colors = ['red', 'black', 'green', 'blue']
 horses = []
@@ -95,10 +87,8 @@ bet_display.hideturtle()
 bet_display.penup()
 bet_display.goto(0, 250)
 
-# =========================
-# 카드 뽑기 버튼
-# =========================
 
+# 카드 뽑기 버튼
 button = turtle.Turtle()
 button.shape("square")
 button.color("black", "white")
@@ -113,10 +103,8 @@ label.color("black")
 label.goto(0, -210)
 label.write("카드 뽑기", align="center", font=("Arial", 16, "bold"))
 
-# =========================
-# 다시 시작 버튼
-# =========================
 
+# 다시 시작 버튼
 restart_button = turtle.Turtle()
 restart_button.shape("square")
 restart_button.color("black", "white")
@@ -131,18 +119,14 @@ restart_label.color("black")
 restart_label.goto(0, -270)
 restart_label.write("다시 시작", align="center", font=("Arial", 14, "bold"))
 
-# =========================
-# 게임 상태 초기화용 변수
-# =========================
 
+# 게임 상태 초기화용 변수
 deck = []                   # 카드 덱 (심볼을 여러 장 포함)
 triggered_penalties = []    # 이미 발생한 패널티 거리 저장
 
 
-# =========================
-# 보조 함수들
-# =========================
 
+# 보조 함수들
 def update_bet_display():
     """현재 배팅 상태 표시"""
     bet_display.clear()
@@ -169,10 +153,8 @@ def input_horse_names():
         horse_names.append(name)
 
 
-# =========================
-# 메인 게임 함수들
-# =========================
 
+# 메인 게임 함수들
 def draw_card(x, y):
     """카드 뽑기 버튼 눌렀을 때 동작"""
     global deck, triggered_penalties, game_over, betting_mode
@@ -303,11 +285,10 @@ def handle_click(x, y):
     draw_card(x, y)
     restart_game(x, y)
 
-# =========================
-# 게임 시작
-# =========================
 
+# 게임 시작
 update_bet_display()
 screen.onclick(handle_click)
 restart_game(0, 0)   # 초기화 자동 시작
 screen.mainloop()
+

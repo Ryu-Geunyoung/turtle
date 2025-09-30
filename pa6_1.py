@@ -134,10 +134,15 @@ def draw_card(x, y):
     if not (-100 < x < 100 and -220 < y < -180):
         return
 
-    if betting_mode:
+    if player_bet is None:
         announce.clear()
-        announce.write("먼저 선택을 완료하세요!", align="left", font=("Arial", 18, "bold"))
+        announce.write("먼저 거북이를 선택하세요!", align="left", font=("Arial", 18, "bold"))
         return
+
+    if betting_mode:
+        betting_mode = False  # 선택 확정
+        announce.clear()
+        announce.write(f"{player_bet} 거북이를 선택하셨습니다.\n게임을 시작합니다!", align="left", font=("Arial", 16, "bold"))
 
     if game_over:
         return
@@ -190,8 +195,8 @@ def draw_card(x, y):
             break
 
 def place_bet(x, y):
-    global player_bet, betting_mode
-    if not betting_mode:
+    global player_bet
+    if game_over or not betting_mode:
         return
     for i, horse in enumerate(horses):
         hx, hy = horse.position()
@@ -199,8 +204,7 @@ def place_bet(x, y):
             player_bet = horse_names[i]
             update_bet_display()
             announce.clear()
-            announce.write(f"{player_bet} 거북이에 선택하셨습니다.\n\n'카드 뽑기'를 눌러 게임을 시작하세요!", align="left", font=("Arial", 16, "bold"))
-            betting_mode = False
+            announce.write(f"{player_bet} 거북이에 선택하셨습니다.\n'카드 뽑기'를 눌러 게임을 시작하세요!", align="left", font=("Arial", 16, "bold"))
             return
 
 def restart_game(x, y):
